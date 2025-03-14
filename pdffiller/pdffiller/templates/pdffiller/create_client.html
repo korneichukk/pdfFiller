@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}New Client{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Submit your Information</h2>
+    <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Personal Information Column -->
+            <div class="space-y-4">
+                <div class="form-field">
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">{{ form.first_name.label }}</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="form-field">
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="form-field">
+                    <label for="dob" class="block text-sm font-medium text-gray-700">{{ form.dob.label }}</label>
+                    {{ form.dob }}
+                </div>
+                <div class="form-field">
+                    <label for="ssn" class="block text-sm font-medium text-gray-700">{{ form.ssn.label }}</label>
+                    {{ form.ssn }}
+                </div>
+                <div class="form-field">
+                    <label for="phone" class="block text-sm font-medium text-gray-700">{{ form.phone.label }}</label>
+                    {{ form.phone }}
+                </div>
+                <div class="form-field">
+                    <label for="email" class="block text-sm font-medium text-gray-700">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-field">
+                    <label for="address" class="block text-sm font-medium text-gray-700">{{ form.address.label }}</label>
+                    {{ form.address }}
+                </div>
+                <div class="form-field">
+                    <label for="city" class="block text-sm font-medium text-gray-700">{{ form.city.label }}</label>
+                    {{ form.city }}
+                </div>
+                <div class="form-field">
+                    <label for="state" class="block text-sm font-medium text-gray-700">{{ form.state.label }}</label>
+                    {{ form.state }}
+                </div>
+                <div class="form-field">
+                    <label for="zip_code" class="block text-sm font-medium text-gray-700">{{ form.zip_code.label }}</label>
+                    {{ form.zip_code }}
+                </div>
+            </div>
+
+            <!-- Company Information Column -->
+            <div class="space-y-4">
+                <div class="form-field">
+                    <label for="company_name" class="block text-sm font-medium text-gray-700">{{ form.company_name.label }}</label>
+                    {{ form.company_name }}
+                </div>
+                <div class="form-field">
+                    <label for="company_address" class="block text-sm font-medium text-gray-700">{{ form.company_address.label }}</label>
+                    {{ form.company_address }}
+                </div>
+                <div class="form-field">
+                    <label for="company_city" class="block text-sm font-medium text-gray-700">{{ form.company_city.label }}</label>
+                    {{ form.company_city }}
+                </div>
+                <div class="form-field">
+                    <label for="company_state" class="block text-sm font-medium text-gray-700">{{ form.company_state.label }}</label>
+                    {{ form.company_state }}
+                </div>
+                <div class="form-field">
+                    <label for="company_zip" class="block text-sm font-medium text-gray-700">{{ form.company_zip.label }}</label>
+                    {{ form.company_zip }}
+                </div>
+                <div class="form-field">
+                    <label for="ein" class="block text-sm font-medium text-gray-700">{{ form.ein.label }}</label>
+                    {{ form.ein }}
+                </div>
+                <div class="form-field">
+                    <label for="date_of_incorporation" class="block text-sm font-medium text-gray-700">{{ form.date_of_incorporation.label }}</label>
+                    {{ form.date_of_incorporation }}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+    </form>
+
+    {% if form.errors %}
+    <div class="mt-4 text-red-600">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="text-sm">{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
