@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth.views import login_required
+from django.http import FileResponse, Http404
 
 from .forms import NewClientForm
 from .doc_filler import fill_pdf_by_coordinates, coordinates, name_pdf_template_map
@@ -18,6 +19,23 @@ logging.basicConfig(
     stream=sys.stdout,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
+
+
+def download_pdf(request, company_name, template_name):
+    file_path = os.path.join(settings.MEDIA_ROOT, company_name, template_name)
+
+    if not os.path.exists(file_path):
+        raise Http404("File not found")
+
+    try:
+        return FileResponse(
+            open(file_path, "rb"),
+            content_type="application/pdf",
+            as_attachment=True,
+            filename=template_name,
+        )
+    except Exception as e:
+        raise Http404(f"Error downloading file: {str(e)}")
 
 
 def delete_old_files(file_paths):
@@ -33,7 +51,7 @@ def delete_old_files(file_paths):
             )
 
             # Check if the file is older than 1 minute
-            if file_age > timedelta(minutes=1):
+            if file_age > timedelta(minutes=10):
                 try:
                     os.remove(file_path)
                     logging.info(f"Deleted old file: {file_path}")
@@ -51,6 +69,8 @@ def index(request):
 
 @login_required
 def create_client(request):
+    username = request.user.username
+
     if request.method == "POST":
         form = NewClientForm(request.POST)
         if form.is_valid():
@@ -78,6 +98,11 @@ def create_client(request):
             generated_files = []
 
             for name, template in name_pdf_template_map.items():
+                if username != "CFSadmin" and (
+                    template == "CFS.pdf" or template == "GeorgeFinance.pdf"
+                ):
+                    continue
+
                 name_coordinate = coordinates.get(name, None)
                 if not name_coordinate:
                     continue
@@ -101,23 +126,24 @@ def create_client(request):
                     font_size,
                 )
 
-                # Add the template name and corresponding download link as a tuple to the list
                 download_link = os.path.join(
                     settings.MEDIA_URL, form_data["company_name"], template
                 )
-                templates_and_links.append((template, download_link))  # Add pair
+                templates_and_links.append((template, download_link))
 
                 generated_files.append(path_to_save_dir / template)
 
             def delete_files_later():
-                threading.Timer(60, delete_old_files, [generated_files]).start()
+                threading.Timer(600, delete_old_files, [generated_files]).start()
 
             delete_files_later()
+
+            logging.info(templates_and_links)
 
             return render(
                 request,
                 "pdffiller/success.html",
-                {"templates_and_links": templates_and_links},
+                {"templates_and_links": templates_and_links, "form_data": form_data},
             )
     else:
         form = NewClientForm()

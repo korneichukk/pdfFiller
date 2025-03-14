@@ -45,6 +45,7 @@ name_pdf_template_map = {
     "peter_brakner": "PeterBrakner.pdf",
     "blue_bridge": "BlueBridge.pdf",
     "quality_equipment": "QualityEquipment.pdf",
+    "george_finance": "GeorgeFinance.pdf",
 }
 
 coordinates = {
@@ -419,6 +420,32 @@ coordinates = {
             "applicant_1_date": (470, 567),
         },
     },
+    "george_finance": {
+        0: {
+            "company_name": (130, 207),
+            "company_address": (90, 227),
+            "phone": (130, 247),
+            "email": (120, 267),
+            "company_city": (290, 227),
+            "company_state": (445, 227),
+            "company_zip": (515, 227),
+            "date_of_incorporation": (380, 247),
+            "ein": (310, 267),
+            # Officer Information
+            "name": (85, 312),
+            "address": (85, 332),
+            "dob": (75, 352),
+            "title": (290, 312),
+            # "ownership": (525, 283),
+            "city": (290, 332),
+            "state": (435, 332),
+            "zip_code": (515, 332),
+            "ssn": (340, 372),
+            # Signatures
+            "applicant_1_name": (130, 788),
+            "applicant_1_date": (470, 788),
+        }
+    },
 }
 
 
@@ -496,9 +523,9 @@ if __name__ == "__main__":
     fill_pdf_by_coordinates(
         Path(__file__).resolve().parent.parent
         / "applications"
-        / name_pdf_template_map["quality_equipment"],
-        Path("QualityEquipment.pdf"),
+        / name_pdf_template_map["george_finance"],
+        Path("GeorgeFinance.pdf"),
         random_data,
-        coordinates["quality_equipment"],
+        coordinates["george_finance"],
         font_size=8,
     )

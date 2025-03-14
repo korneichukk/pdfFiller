@@ -11,7 +11,8 @@
     <ul class="space-y-3">
         {% for template_name, download_link in templates_and_links %}
         <li>
-            <a href="{{ download_link }}" class="block text-blue-600 hover:text-blue-800 text-lg hover:underline transition duration-300">
+            <a href="{% url 'download_pdf' company_name=form_data.company_name template_name=template_name %}"
+               class="block text-blue-600 hover:text-blue-800 text-lg hover:underline transition duration-300">
                 Download {{ template_name }}
             </a>
         </li>
