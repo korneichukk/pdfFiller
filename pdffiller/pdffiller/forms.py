@@ -22,9 +22,11 @@ class NewClientForm(forms.Form):
     last_name = forms.CharField(label="Last Name", max_length=100)
     dob = forms.DateField(
         label="Date of Birth",
+        input_formats=["%m-%d-%Y"],  # Accepts MM-DD-YYYY format
         widget=forms.DateInput(
             attrs={
-                "class": "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                "placeholder": "MM-DD-YYYY",
+                "class": "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500",
             }
         ),
     )
@@ -44,9 +46,11 @@ class NewClientForm(forms.Form):
     ein = forms.CharField(label="EIN", max_length=20)
     date_of_incorporation = forms.DateField(
         label="Date of Incorporation",
+        input_formats=["%m-%d-%Y"],  # Accepts MM-DD-YYYY format
         widget=forms.DateInput(
             attrs={
-                "class": "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                "placeholder": "MM-DD-YYYY",
+                "class": "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500",
             }
         ),
     )

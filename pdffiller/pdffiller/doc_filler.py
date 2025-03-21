@@ -46,6 +46,7 @@ name_pdf_template_map = {
     "blue_bridge": "BlueBridge.pdf",
     "quality_equipment": "QualityEquipment.pdf",
     "george_finance": "GeorgeFinance.pdf",
+    "gandr": "GandR.pdf",
 }
 
 coordinates = {
@@ -243,25 +244,27 @@ coordinates = {
     "crossroads": {
         0: {
             # Company Information
-            "company_name": (105, 103),
-            "company_address": (115, 117),
-            "company_city": (90, 133),
-            "company_state": (255, 133),
-            "company_zip": (330, 133),
-            "ein": (420, 97),
-            "phone": [(450, 111), (450, 128), (335, 270)],
-            "email": [(335, 150), (330, 255)],
-            "date_of_incorporation": [(130, 180), (255, 165)],
-            "title": [(255, 150), (340, 705)],
+            "company_name": (105, 70),
+            "company_address": (115, 87),
+            "company_city": (90, 105),
+            "company_state": [(260, 105), (265, 157)],
+            "company_zip": (345, 105),
+            "ein": (435, 70),
+            "phone": [(480, 87), (480, 105), (345, 255)],
+            "title": (260, 123),
+            "email": [(345, 240), (348, 123)],
+            "ssn": [(70, 140), (130, 255)],
+            "years_in_business": (260, 140),
+            "date_of_incorporation": [(130, 157)],
+            "title": [(255, 150)],
             # Owner Information
-            "name": [(115, 150), (87, 255)],
-            "ssn": [(90, 165), (130, 270)],
-            "person_address": (115, 287),
-            "dob": (250, 255),
-            "ownership": (270, 270),
+            "name": [(105, 123), (90, 240)],
+            "dob": (250, 240),
+            "ownership": (270, 255),
+            "person_address": (95, 272),
             # Signatures
-            "applicant_1_name": (130, 710),
-            "applicant_1_date": (500, 705),
+            "applicant_1_name": (110, 745),
+            "applicant_1_date": (510, 745),
         }
     },
     "darla": {
@@ -424,8 +427,8 @@ coordinates = {
         0: {
             "company_name": (130, 207),
             "company_address": (90, 227),
-            "phone": (130, 247),
-            "email": (120, 267),
+            "phone": [(130, 247), (120, 372)],
+            "email": [(120, 267), (340, 372)],
             "company_city": (290, 227),
             "company_state": (445, 227),
             "company_zip": (515, 227),
@@ -440,10 +443,36 @@ coordinates = {
             "city": (290, 332),
             "state": (435, 332),
             "zip_code": (515, 332),
-            "ssn": (340, 372),
+            "ssn": (290, 352),
             # Signatures
             "applicant_1_name": (130, 788),
             "applicant_1_date": (470, 788),
+        }
+    },
+    "gandr": {
+        0: {  # Company Information
+            "company_name": (150, 225),
+            "company_address": (110, 247),
+            "phone": [(150, 270), (150, 410)],
+            "email": [(150, 295), (400, 410)],
+            "company_city": (340, 247),
+            "company_state": (460, 247),
+            "company_zip": (524, 247),
+            "date_of_incorporation": (460, 270),
+            "ein": (360, 295),
+            # Officer Information
+            "name": (110, 340),
+            "address": (110, 363),
+            "dob": (110, 385),
+            "title": (340, 340),
+            "ownership": (525, 340),
+            "city": (340, 363),
+            "state": (460, 363),
+            "zip_code": (524, 363),
+            "ssn": (340, 385),
+            # Signatures
+            "applicant_1_name": (170, 800),
+            "applicant_1_date": (480, 800),
         }
     },
 }
@@ -523,9 +552,9 @@ if __name__ == "__main__":
     fill_pdf_by_coordinates(
         Path(__file__).resolve().parent.parent
         / "applications"
-        / name_pdf_template_map["george_finance"],
-        Path("GeorgeFinance.pdf"),
+        / name_pdf_template_map["crossroads"],
+        Path("Crossroads.pdf"),
         random_data,
-        coordinates["george_finance"],
+        coordinates["crossroads"],
         font_size=8,
     )

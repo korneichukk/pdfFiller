@@ -99,4 +99,24 @@
     </div>
     {% endif %}
 </div>
+
+<script>
+    function formatDateInput(inputId) {
+        let input = document.getElementById(inputId);
+
+        input.addEventListener("input", function () {
+            let value = this.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+
+            if (value.length === 8) {
+                let formattedDate = value.slice(0, 2) + '-' + value.slice(2, 4) + '-' + value.slice(4, 8);
+                this.value = formattedDate; // Replace input field value with formatted date
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        formatDateInput("id_dob");
+        formatDateInput("id_date_of_incorporation");
+    });
+</script>
 {% endblock %}

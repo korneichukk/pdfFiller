@@ -98,9 +98,10 @@ def create_client(request):
             generated_files = []
 
             for name, template in name_pdf_template_map.items():
-                if username != "CFSadmin" and (
-                    template == "CFS.pdf" or template == "GeorgeFinance.pdf"
-                ):
+                if (
+                    username != "CFSadmin"
+                    and (template == "CFS.pdf" or template == "GeorgeFinance.pdf")
+                ) or (username == "CFSadmin" and template == "GandR.pdf"):
                     continue
 
                 name_coordinate = coordinates.get(name, None)

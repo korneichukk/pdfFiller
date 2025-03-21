@@ -7,12 +7,6 @@
     <title>PDF Filler</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Flatpickr CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -38,18 +32,6 @@
         {% block content %}
         {% endblock %}
     </main>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            flatpickr("#id_dob", {
-                dateFormat: "Y-m-d",
-            });
-
-            flatpickr("#id_date_of_incorporation", {
-                dateFormat: "Y-m-d",
-            });
-        });
-    </script>
 </body>
 
 </html>
